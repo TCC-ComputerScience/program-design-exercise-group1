@@ -1,0 +1,13 @@
+struct battleship {
+  bool shipRandomizer[][] //The true and false values of this array will determine where the ships will be placed on the 10x10 grid by random
+  char battleMap[][] //This will print the entirety of the map and will change based on whther a ship has been hit or not
+  int ROW_MAX = 10; //Maximum row size
+  int COL_MAX =10; //Maximum Column size
+  };
+  
+  Michael: My general idsea with this structure is to randomly assign bool values to the shipRandomizer, and have a
+  function where the user inputs a location and a function will seach through shipRandomizer to see if the coordinates 
+  in the array equal true. If the coodrinate is true it will print  "H", or if false then '.' will print on the map. 
+  Can someone explain the main use of the # symbol please? Fell free to add onto this list if you have anymore quaestions or ideas.
+  11/23/19
+  
