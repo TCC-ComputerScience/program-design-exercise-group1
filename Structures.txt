@@ -11,3 +11,6 @@ struct battleship {
   Can someone explain the main use of the # symbol please? Fell free to add onto this list if you have anymore quaestions or ideas.
   11/23/19
   
+  IF you want to contact me or assemble a group chat or voice chat for planning here is my email and discord
+  Email:mrt2803@email.vccs.edu
+  Discord: TheJiggspuff#2668
