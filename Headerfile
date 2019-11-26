@@ -1,0 +1,10 @@
+struct battleship {
+  bool shipLocation //The true and false values of this array will determine where the ships will be placed on the 10x10 grid by random
+  char battleMap //This will print the entirety of the map and will change based on whther a ship has been hit or not
+  };
+  
+  int ROW_MAX = 10; //Maximum row size
+  int COL_MAX =10; //Maximum Column size
+  
+  battleship board[ROW_MAX][COL_MAX];
+  
