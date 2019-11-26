@@ -8,8 +8,8 @@ struct battleship {
   
   battleship board[ROW_MAX][COL_MAX];
   
-  Michael: My general idsea with this structure is to randomly assign bool values to the shipRandomizer, and have a
-  function where the user inputs a location and a function will seach through shipRandomizer to see if the coordinates 
+  Michael: My general idsea with this structure is to randomly assign bool values to the shipLocation, and have a
+  function where the user inputs a location and a function will seach through shipLocation to see if the coordinates 
   in the array equal true. If the coodrinate is true it will print  "H", or if false then '.' will print on the map. 
   Can someone explain the main use of the # symbol please? Fell free to add onto this list if you have anymore quaestions or ideas.
   11/23/19
