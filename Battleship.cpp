@@ -5,8 +5,8 @@ using namespace std;
 enum Marks {Hit, Miss, Water, Ship};
 enum ShipType {None, Pat, Sub, Dest, Battle, Carrier};
 
-const int ROWS    = 10;            //default size 10
-const int COLUMNS = 10;            //default size 10
+const int ROWS    = 11;            //default size 10
+const int COLUMNS = 11;            //default size 10
 
 // Makes a board of randomly generated values where ships are placed
 // Pre: none
@@ -66,11 +66,13 @@ void PrintGrid(){
     char letter = 'A';
     char number = '1';
 
-    cout << " ";
+    //cout << " ";
+    board[0][0] = ' ';
+    cout << board[0][0];    // very top left index of 2D array is a space
 
-    for (int i = 1; i < 11; i++){
+    for (int i = 1; i < ROW; i++){      // SHOULD make top row of 2D array A - J
 
-        board[i][0] = letter;
+        board[i][0] = letter;   
         cout << board[i][0];
         cout << " ";
         letter++;
@@ -78,25 +80,12 @@ void PrintGrid(){
 
     cout << '\n';
 
-    for (int i = 1; i < 11; i++){
+    for (int i = 1; i < COLUMN; i++){   // SHOULD make left most column of 2D array 1 - 10
 
-        board[i][i] = number;
-        cout << board[i][i];
+        board[0][i] = number;
+        cout << board[0][i];
         cout << '\n';
         number++;
+        // important problem: printing out 10 for the bottom left corner of an array containing chars
     }
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
