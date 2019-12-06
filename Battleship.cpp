@@ -68,6 +68,10 @@ void InitGrid(battleship Grid[][11]){
 
     char letter = 'A';
     int number = 1;
+    int shipSelection;
+    ShipType ship;
+    int placeOrientation;
+    Orientation placement;
 
 
     Grid[0][0].row = ' ';
@@ -95,7 +99,59 @@ void InitGrid(battleship Grid[][11]){
          }
     }
 
+
+    for (int i = 1; i < ROWS; i++){ //This sets every character in row in between the first column and first row waves
+
+         for (int j = 1; j < COLUMNS; j++){
+
+                //Randomly select ship based on random integers 0-5
+                shipSelection = rand() % 6;
+                switch (shipSelection) {
+
+                    case 0 : ship = None;
+                             break;
+                    case 1 : ship = Pat;
+                             break;
+                    case 2: ship = Sub;
+                            break;
+                    case 3: ship = Dest;
+                            break;
+                    case 4: ship = Battle;
+                            break;
+                    case 5: ship = Carrier;
+                            break;
+
+                }
+
+                //Select ship based on random integers 0-1
+               if (ship != None) {
+                    placeOrientation = rand() % 2;
+                    switch (placeOrientation) {
+                        case 0 : placement = Horizontal;
+                             break;
+                        case 1 : placement = Vertical;
+                             break;
+                    }
+
+               }
+
+
+
+
+
+               //If none is picked, there will be no ship placement
+               else {
+
+                Grid[i][j].location = false;
+
+               }
+
+
+            }
+
+         }
 }
+
 
 
 // Prints the grid using only water, hit and miss marks
