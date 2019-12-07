@@ -12,7 +12,7 @@ enum Marks {Hit, Miss, Water, Ship};
 enum ShipType {None, Pat, Sub, Dest, Battle, Carrier};
 enum Orientation {Horizontal, Vertical};
 
-struct battleship{
+struct battleship{ //Struct to hold Battleships coordinates
 
     char row;
     int  column;
@@ -79,11 +79,11 @@ int main()
 // Post: A grid consisting of ships and blank spaces is created but not displayed
 void InitGrid(battleship Grid[][11]){
 
-    char letter = 'A';
-    int number = 1;
+    char letter = 'A'; // Initializes top row of Grid 
+    int number = 1; // Initializes Left most column of Grid
 
 
-    Grid[0][0].row = ' ';
+    Grid[0][0].row = ' '; // Space at upper left corner/Out of bounds.
 
     for (int i = 1; i < ROWS; i++){      // SHOULD make top row of Grid.letter of A - J
 
@@ -108,7 +108,7 @@ void InitGrid(battleship Grid[][11]){
          }
     }
 
-    ShipPlace(Grid);
+    ShipPlace(Grid); // Call to Place ships on initialized grid
 
 }
 
@@ -202,7 +202,7 @@ void ShipPlace (battleship Grid [][11]){
         }
         } while (shipAmount = false);
 
-        //Select ship based on random integers 0-1
+        //Select ship orientation based on random integers 0-1
 
             placeOrientation = rand() % 2;
             switch (placeOrientation)
