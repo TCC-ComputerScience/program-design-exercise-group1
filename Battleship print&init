@@ -1,0 +1,37 @@
+
+
+int SIZE = 11
+int NUMBER_OF_SHIP = 5
+
+void displayGrid(char grid[][SIZE]) {
+    cout << "   |"; //Start of row count
+    for (int i = 0; i < SIZE; i++) {
+        cout << " " << i << " |"; // Row numbered from 0-10 with cosmetic line seperating numbers.
+    }
+    cout << endl;
+    for (int i = 0; i < SIZE; i++) {
+        for (int i = 0; i <= SIZE; i++) {
+            cout << "---+";  //Cosmetic can delete if want
+        }
+
+        cout << endl << " " << i << " |";
+        for (int j = 0; j < SIZE; j++) {
+            cout << " " << grid[i][j] << " |"; // Column count
+        }
+        cout << endl;
+    }
+    for (int i = 0; i <= SIZE; i++) {
+        cout << "---+"; // Cosmetic can delete if want
+    }
+    cout << endl;
+
+}
+
+void initializeGrid(char grid[][SIZE]) {
+    for (int i = 0; i < SIZE; i++) {
+
+        for (int j = 0; j < SIZE; j++) {
+            grid[i][j] = '~'; //Traverse thru each position and place the wave
+        }
+    }
+}
