@@ -1,3 +1,8 @@
+//PACE/Github Assignment -- Part 3 (Beginning Implementation)
+// BattleShip Program -The computer generates the board and places the ships, and then the player has to guess the ship positions.
+// 12/7/2019
+// Program-design-exercise-group1(Github)
+// Pace 9 (Canvas)
 #include <iostream>
 #include <stdio.h>      /* printf, NULL */
 #include <stdlib.h>     /* srand, rand */
