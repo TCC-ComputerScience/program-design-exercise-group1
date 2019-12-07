@@ -1,7 +1,10 @@
 #include <iostream>
+#include <stdio.h>      /* printf, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 enum Marks {Hit, Miss, Water, Ship};
-enum ShipType {None, Pat, Dest, Battle, Carrier};
+enum ShipType {None, Pat, Sub, Dest, Battle, Carrier};
 enum Orientation {Horizontal, Vertical};
 
 struct battleship{
@@ -26,7 +29,7 @@ void InitGrid(battleship Grid[][11]);
 //Places a true bool value based on ship size, orientation, and amount
 //Pre: There is a value fo the ShipType variable and Orientation variable
 //Post: The ship will be place onto the grid without overlap
-void ShipPlace (battleship Grid [][11], ShipType ship, Orientation placement, int & patrol, int & destroyer, int & battleship, int & carrier);
+void ShipPlace (battleship Grid [][11]);
 
 // Prints the grid using only water, hit and miss marks
 // Pre: A play grid has been created
@@ -73,15 +76,6 @@ void InitGrid(battleship Grid[][11]){
 
     char letter = 'A';
     int number = 1;
-    int shipSelection;
-    ShipType ship;
-    int placeOrientation;
-    Orientation placement;
-    int patrol = 4;
-    int destroyer = 3;
-    int battleship = 2;
-    int carrier = 1;
-
 
 
     Grid[0][0].row = ' ';
@@ -109,66 +103,216 @@ void InitGrid(battleship Grid[][11]){
          }
     }
 
+    ShipPlace(Grid);
 
-    for (int i = 1; i < ROWS; i++){ //This sets every character in row in between the first column and first row waves
-
-         for (int j = 1; j < COLUMNS; j++){
-
-                //Randomly select ship based on random integers 0-5
-                shipSelection = rand() % 5;
-                switch (shipSelection) {
-
-                    case 0 : ship = None;
-                             break;
-                    case 1 : ship = Pat;
-                             break;
-                    case 2: ship = Dest;
-                            break;
-                    case 3: ship = Battle;
-                            break;
-                    case 4: ship = Carrier;
-                            break;
-
-                }
-
-                //Select ship based on random integers 0-1
-               if (ship != None) {
-                    placeOrientation = rand() % 2;
-                    switch (placeOrientation) {
-                        case 0 : placement = Horizontal;
-                             break;
-                        case 1 : placement = Vertical;
-                             break;
-                    }
-
-                    ShipPlace(Grid, ship, placement, patrol, destroyer, battleship, carrier);
-
-               }
-
-               //If none is picked, there will be no ship placement
-               else {
-
-                Grid[i][j].location = false;
-
-
-               }
-
-
-            }
-
-         }
 }
 
 //Places a true bool value based on ship size, orientation, and amount
 //Pre: There is a value fo the ShipType variable and Orientation variable
 //Post: The ship will be place onto the grid without overlap
-void ShipPlace (battleship Grid [][11], ShipType ship, Orientation placement, int & patrol, int & destroyer, int & battleship, int & carrier){
+void ShipPlace (battleship Grid [][11]){
+
+    int shipSelection;
+    ShipType ship;
+    int placeOrientation;
+    Orientation ori;
+    int locatx, locaty;
+
+    srand (time(NULL));
+    for (int c = 0; c < 5; c++)
+    {
+
+        //Randomly select ship based on random integers 0-5
+        shipSelection = rand() % 5;
+        switch (shipSelection)
+        {
+
+        case 0 :
+            ship = None;
+            break;
+        case 1 :
+            ship = Pat;
+            break;
+        case 2:
+            ship = Sub;
+            break;
+        case 3:
+            ship = Dest;
+            break;
+        case 4:
+            ship = Battle;
+            break;
+        case 5:
+            ship = Carrier;
+            break;
+
+        }
+
+        //Select ship based on random integers 0-1
+        if (ship != None)
+        {
+
+            placeOrientation = rand() % 2;
+            switch (placeOrientation)
+            {
+            case 0 :
+                ori = Horizontal;
+                break;
+            case 1 :
+                ori = Vertical;
+                break;
+            }
+
+            switch (ship)
+            {
+            case None:
+                break;
+            case Pat:
+                locatx = rand() % 9 + 1;    // random number between 1 and 9
+                locaty = rand() % 9 + 1;    // random number between 1 and 9
+                Grid[locatx][locaty].row = '#';
+                Grid[locatx][locaty].location = true;
+                break;
+            case Sub:
+                locatx = rand() % 9 + 1;    // random number between 1 and 9
+                locaty = rand() % 9 + 1;    // random number between 1 and 9
+                Grid[locatx][locaty].row = '#';
+                Grid[locatx][locaty].location = true;
+                if (ori == Vertical){
+                    Grid[locatx][locaty + 1].row = '#';
+                    Grid[locatx][locaty+1].location = true;
+                }
+                else{
+                    Grid[locatx + 1][locaty].row = '#';
+                    Grid[locatx +1][locaty].location = true;
+                }
+                break;
+            case Dest:
+                locatx = rand() % 9 + 1;    // random number between 1 and 9
+                locaty = rand() % 9 + 1;    // random number between 1 and 9
+                Grid[locatx][locaty].row = '#';
+                //for (int d = 0; d < 3; d++)
+                //{
+                if (ori == Vertical)
+                {
+                    Grid[locatx][locaty + 1].row = '#';
+                    Grid[locatx][locaty - 1].row = '#';
+                    Grid[locatx][locaty + 2].row = '#';
+                    Grid[locatx][locaty - 2].row = '#';
+                    Grid[locatx][locaty + 1].location = true;
+                    Grid[locatx][locaty - 1].location = true;
+                    Grid[locatx][locaty + 2].location = true;
+                    Grid[locatx][locaty - 2].location = true;
+                }
+                else
+                {
+                    Grid[locatx + 1][locaty].row = '#';
+                    Grid[locatx - 1][locaty].row = '#';
+                    Grid[locatx + 2][locaty].row = '#';
+                    Grid[locatx - 2][locaty].row = '#';
+                    Grid[locatx + 1][locaty].location = true;
+                    Grid[locatx - 1][locaty].location = true;
+                    Grid[locatx + 2][locaty].location = true;
+                    Grid[locatx - 2][locaty].location = true;
+                }
+                //}
+                break;
+            case Battle:
+                locatx = rand() % 9 + 1;    // random number between 1 and 9
+                locaty = rand() % 9 + 1;    // random number between 1 and 9
+                Grid[locatx][locaty].row = '#';
+                //for (int d = 0; d < 4; d++)
+                //{
+                if (ori == Vertical)
+                {
+                    Grid[locatx][locaty + 1].row = '#';
+                    Grid[locatx][locaty - 1].row = '#';
+                    Grid[locatx][locaty + 2].row = '#';
+                    Grid[locatx][locaty - 2].row = '#';
+                    Grid[locatx][locaty + 3].row = '#';
+                    Grid[locatx][locaty - 3].row = '#';
+
+                    Grid[locatx][locaty + 1].location = true;
+                    Grid[locatx][locaty - 1].location = true;
+                    Grid[locatx][locaty + 2].location = true;
+                    Grid[locatx][locaty - 2].location = true;
+                    Grid[locatx][locaty + 3].location = true;
+                    Grid[locatx][locaty - 3].location = true;
+
+                }
+                else
+                {
+                    Grid[locatx + 1][locaty].row = '#';
+                    Grid[locatx - 1][locaty].row = '#';
+                    Grid[locatx + 2][locaty].row = '#';
+                    Grid[locatx - 2][locaty].row = '#';
+                    Grid[locatx + 3][locaty].row = '#';
+                    Grid[locatx - 3][locaty].row = '#';
+
+                    Grid[locatx + 1][locaty].location = true;
+                    Grid[locatx - 1][locaty].location = true;
+                    Grid[locatx + 2][locaty].location = true;
+                    Grid[locatx - 2][locaty].location = true;
+                    Grid[locatx + 3][locaty].location = true;
+                    Grid[locatx - 3][locaty].location = true;
+                }
+                //}
+                break;
+            case Carrier:
+                locatx = rand() % 9 + 1;    // random number between 1 and 9
+                locaty = rand() % 9 + 1;    // random number between 1 and 9
+                Grid[locatx][locaty].row = '#';
+                //for (int d = 0; d < 5; d++)
+                //{
+                if (ori == Vertical)
+                {
+                    Grid[locatx][locaty + 1].row = '#';
+                    Grid[locatx][locaty - 1].row = '#';
+                    Grid[locatx][locaty + 2].row = '#';
+                    Grid[locatx][locaty - 2].row = '#';
+                    Grid[locatx][locaty + 3].row = '#';
+                    Grid[locatx][locaty - 3].row = '#';
+                    Grid[locatx][locaty + 4].row = '#';
+                    Grid[locatx][locaty - 4].row = '#';
+
+                    Grid[locatx][locaty + 1].location = true;
+                    Grid[locatx][locaty - 1].location = true;
+                    Grid[locatx][locaty + 2].location = true;
+                    Grid[locatx][locaty - 2].location = true;
+                    Grid[locatx][locaty + 3].location = true;
+                    Grid[locatx][locaty - 3].location = true;
+                    Grid[locatx][locaty + 4].location = true;
+                    Grid[locatx][locaty - 4].location = true;
+
+                }
+                else
+                {
+                    Grid[locatx + 1][locaty].row = '#';
+                    Grid[locatx - 1][locaty].row = '#';
+                    Grid[locatx + 2][locaty].row = '#';
+                    Grid[locatx - 2][locaty].row = '#';
+                    Grid[locatx + 3][locaty].row = '#';
+                    Grid[locatx - 3][locaty].row = '#';
+                    Grid[locatx + 4][locaty].row = '#';
+                    Grid[locatx - 4][locaty].row = '#';
+
+                    Grid[locatx + 1][locaty].location = true;
+                    Grid[locatx - 1][locaty].location = true;
+                    Grid[locatx + 2][locaty].location = true;
+                    Grid[locatx - 2][locaty].location = true;
+                    Grid[locatx + 3][locaty].location = true;
+                    Grid[locatx - 3][locaty].location = true;
+                    Grid[locatx + 4][locaty].location = true;
+                    Grid[locatx - 4][locaty].location = true;
+                }
+                //}
+                break;
+            }
+        }
 
 
 
-
-
-
+    }
 
 }
 
