@@ -1,7 +1,7 @@
 #include <iostream>
 
 enum Marks {Hit, Miss, Water, Ship};
-enum ShipType {None, Pat, Sub, Dest, Battle, Carrier};
+enum ShipType {None, Pat, Dest, Battle, Carrier};
 enum Orientation {Horizontal, Vertical};
 
 struct battleship{
@@ -22,6 +22,11 @@ using namespace std;
 // Pre: A grid with ships was created
 // Post: A grid consisting of ships and blank spaces is created but not displayed
 void InitGrid(battleship Grid[][11]);
+
+//Places a true bool value based on ship size, orientation, and amount
+//Pre: There is a value fo the ShipType variable and Orientation variable
+//Post: The ship will be place onto the grid without overlap
+void ShipPlace (battleship Grid [][11], ShipType ship, Orientation placement, int & patrol, int & destroyer, int & battleship, int & carrier);
 
 // Prints the grid using only water, hit and miss marks
 // Pre: A play grid has been created
@@ -72,6 +77,11 @@ void InitGrid(battleship Grid[][11]){
     ShipType ship;
     int placeOrientation;
     Orientation placement;
+    int patrol = 4;
+    int destroyer = 3;
+    int battleship = 2;
+    int carrier = 1;
+
 
 
     Grid[0][0].row = ' ';
@@ -105,20 +115,18 @@ void InitGrid(battleship Grid[][11]){
          for (int j = 1; j < COLUMNS; j++){
 
                 //Randomly select ship based on random integers 0-5
-                shipSelection = rand() % 6;
+                shipSelection = rand() % 5;
                 switch (shipSelection) {
 
                     case 0 : ship = None;
                              break;
                     case 1 : ship = Pat;
                              break;
-                    case 2: ship = Sub;
+                    case 2: ship = Dest;
                             break;
-                    case 3: ship = Dest;
+                    case 3: ship = Battle;
                             break;
-                    case 4: ship = Battle;
-                            break;
-                    case 5: ship = Carrier;
+                    case 4: ship = Carrier;
                             break;
 
                 }
@@ -133,16 +141,15 @@ void InitGrid(battleship Grid[][11]){
                              break;
                     }
 
+                    ShipPlace(Grid, ship, placement, patrol, destroyer, battleship, carrier);
+
                }
-
-
-
-
 
                //If none is picked, there will be no ship placement
                else {
 
                 Grid[i][j].location = false;
+
 
                }
 
@@ -151,6 +158,20 @@ void InitGrid(battleship Grid[][11]){
 
          }
 }
+
+//Places a true bool value based on ship size, orientation, and amount
+//Pre: There is a value fo the ShipType variable and Orientation variable
+//Post: The ship will be place onto the grid without overlap
+void ShipPlace (battleship Grid [][11], ShipType ship, Orientation placement, int & patrol, int & destroyer, int & battleship, int & carrier){
+
+
+
+
+
+
+
+}
+
 
 
 
